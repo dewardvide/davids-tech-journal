@@ -8,6 +8,10 @@ notebook: paper rather than white, a 150px margin rail carrying date and topic,
 hairline rules, one sage accent, one ochre for tags, and no shadows, gradients,
 animation, or emoji anywhere.
 
+**[ARCHITECTURE.md](ARCHITECTURE.md)** explains how the site is put together and why, and
+carries a change log. Every feature added here is documented there as part of the same
+change.
+
 ## Running it
 
 ```bash
