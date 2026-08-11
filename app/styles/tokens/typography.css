@@ -1,0 +1,44 @@
+:root{
+  --font-serif-display:'Source Serif 4', Georgia, serif;
+  --font-sans-body:'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono-meta:'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Size scale — 8 steps, each anchored to a value the source design actually uses.
+     Ratio is ~1.2 through the middle of the scale; the display step keeps its
+     editorial jump. Do not add sizes between these steps. */
+  --size-display:2.6rem;   /* h1 / masthead */
+  --size-h2:1.5rem;        /* section heading */
+  --size-h3:1.2rem;        /* entry title */
+  --size-lede:1.05rem;     /* lede, standfirst */
+  --size-body:1rem;        /* body copy */
+  --size-sm:.9rem;         /* summaries, buttons, callouts, code */
+  --size-meta:.78rem;      /* mono meta: dates, read time, kickers */
+  --size-micro:.68rem;     /* mono micro: tags, rail labels, nav */
+
+  /* Back-compat aliases — prefer the eight steps above in new work. */
+  --size-body-sm:var(--size-sm);
+  --size-caption:var(--size-meta);
+  --size-mono-sm:var(--size-meta);
+  --size-mono-xs:var(--size-micro);
+  --size-mono-2xs:var(--size-micro);
+
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+
+  --leading-body:1.55;
+  --leading-tight:1.2;
+  --leading-code:1.6;
+
+  --tracking-display:-0.01em;
+  --tracking-meta:.08em;
+  --tracking-tag:.04em;
+
+  --measure-lede:60ch;
+  --measure-body:56ch;
+
+  --type-title:var(--font-serif-display);
+  --type-ui:var(--font-sans-body);
+  --type-system:var(--font-mono-meta);
+}

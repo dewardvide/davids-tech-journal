@@ -1,0 +1,19 @@
+/* The 150px margin rail is the layout constant — but it cannot survive a phone.
+   Below 720px the rail unstacks: date and topic sit on one horizontal line
+   above the entry, and the page padding tightens. Components opt in with
+   class="dtj-rail" (grid) and class="dtj-rail-head" (the rail cell). */
+.dtj-page{max-width:var(--content-max);margin:0 auto;padding:var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom)}
+.dtj-rail{display:grid;grid-template-columns:var(--rail-width) 1fr;gap:var(--gap-rail)}
+.dtj-rail-head{display:block}
+
+@media (max-width:720px){
+  .dtj-page{padding:24px 18px 72px}
+  .dtj-rail{grid-template-columns:1fr;gap:10px}
+  .dtj-rail-head{display:flex;align-items:center;gap:12px}
+  .dtj-rail-head>*{margin-top:0 !important}
+  h1{font-size:2rem}
+}
+@media (max-width:480px){
+  .dtj-page{padding:20px 16px 64px}
+  h1{font-size:1.7rem}
+}

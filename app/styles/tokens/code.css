@@ -1,0 +1,19 @@
+/* Code is a first-class content type here. Highlighting stays inside the brand
+   palette: sage for keywords, ochre for strings, ink-soft for everything
+   incidental. No rainbow themes. */
+:root{
+  --code-bg:var(--bg-page-dim);
+  --code-fg:var(--text-body);
+  --code-border:var(--border-hairline);
+  --code-bar-bg:var(--surface-card);
+  --code-comment:var(--ink-soft);
+  --code-keyword:var(--accent);
+  --code-string:var(--tag);
+  --code-number:var(--ink-soft);
+  --code-fn:var(--text-body);
+  --code-punct:var(--ink-soft);
+  --code-gutter:var(--ink-soft);
+  --code-size:var(--size-sm);
+  --code-pad:14px 16px;
+  --code-inline-bg:var(--bg-page-dim);
+}

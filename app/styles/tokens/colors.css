@@ -1,0 +1,56 @@
+:root{
+  /* base palette — light (default) */
+  --paper:#F7F8F6;
+  --paper-dim:#EFF1EE;
+  --white:#FFFFFF;
+  --ink:#1B222C;
+  --ink-soft:#5B6472;
+  --accent:#3F6C51;
+  --accent-soft:#E7EEE8;
+  --tag:#8A6D3B;
+  --line:#DCE1DC;
+
+  /* semantic aliases */
+  --bg-page:var(--paper);
+  --bg-page-dim:var(--paper-dim);
+  --surface-card:var(--white);
+  --surface-callout:var(--accent-soft);
+  --text-body:var(--ink);
+  --text-muted:var(--ink-soft);
+  --text-inverse:var(--paper);
+  --text-link:var(--accent);
+  --text-tag:var(--tag);
+  --border-hairline:var(--line);
+  --border-accent:var(--accent);
+  --border-tag:var(--tag);
+  --btn-primary-bg:var(--ink);
+  --btn-primary-fg:var(--paper);
+  --btn-outline-border:var(--line);
+  --focus-ring:var(--accent);
+}
+
+/* Dark mode — the same notebook at night. Set data-theme="dark" on <html>.
+   Ink becomes the page; paper becomes the type. Sage and ochre are lifted
+   just enough to hold contrast on a dark ground; nothing else changes. */
+[data-theme="dark"]{
+  --paper:#E8EAE6;
+  --paper-dim:#1B222C;
+  --white:#1E252F;
+  --ink:#E8EAE6;
+  --ink-soft:#9AA3B0;
+  --accent:#7FA98C;
+  --accent-soft:#24302A;
+  --tag:#C4A263;
+  --line:#2C343F;
+
+  --bg-page:#161B22;
+  --bg-page-dim:#1B222C;
+  --surface-card:#1E252F;
+  --surface-callout:var(--accent-soft);
+  --text-body:#E8EAE6;
+  --text-muted:#9AA3B0;
+  --text-inverse:#161B22;
+  --btn-primary-bg:#E8EAE6;
+  --btn-primary-fg:#161B22;
+  --btn-outline-border:var(--line);
+}

@@ -1,0 +1,177 @@
+/* Site-level layer. Two jobs only:
+   1. point the design system's three font tokens at the next/font faces
+   2. style long-form markdown prose, which the system defines for a bare page
+      but not for generated HTML
+   Nothing here introduces a new colour, size, radius, or shadow. */
+
+:root{
+  --font-serif-display:var(--font-source-serif), Georgia, serif;
+  --font-sans-body:var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono-meta:var(--font-plex-mono), ui-monospace, monospace;
+}
+
+html{background:var(--bg-page)}
+
+/* base.css sets the display family and sizes but leaves headings on the body's
+   1.55 leading; --leading-tight is the token they are meant to sit on. */
+h1,h2,h3{line-height:var(--leading-tight)}
+
+/* ---- shared page furniture ---- */
+
+.dtj-kicker{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-meta);
+  letter-spacing:var(--tracking-meta);
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
+
+.dtj-lede{
+  font-size:var(--size-lede);
+  color:var(--text-muted);
+  max-width:var(--measure-lede);
+  margin:.6em 0 0;
+}
+
+/* A section: ~3.2em of air, a hairline, then 1.4em before the heading. */
+.dtj-section{
+  margin-top:3.2em;
+  border-top:1px solid var(--border-hairline);
+  padding-top:1.4em;
+}
+
+.dtj-cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--gap-rail);
+  margin-top:1.4em;
+}
+
+.dtj-arrow{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-meta);
+  display:inline-block;
+}
+
+/* ---- long-form prose (markdown → HTML) ---- */
+
+.dtj-prose{
+  font-size:var(--size-body);
+  line-height:var(--leading-body);
+  max-width:var(--measure-body);
+}
+.dtj-prose > * + *{margin-top:1.1em}
+.dtj-prose h2{
+  font-size:var(--size-h2);
+  margin:1.8em 0 .3em;
+  padding-top:1.4em;
+  border-top:1px solid var(--border-hairline);
+}
+/* An entry that opens on a heading would otherwise double the rule that
+   already closes the entry header. */
+.dtj-prose > h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.dtj-prose h3{font-size:var(--size-h3);margin:1.6em 0 .3em}
+.dtj-prose p{margin:1.1em 0 0}
+.dtj-prose ul,.dtj-prose ol{margin:1.1em 0 0;padding-left:1.3em}
+.dtj-prose li{margin-top:.45em}
+.dtj-prose li::marker{color:var(--text-muted)}
+.dtj-prose strong{font-weight:var(--weight-semibold)}
+.dtj-prose hr{
+  border:0;
+  border-top:1px solid var(--border-hairline);
+  margin:2.4em 0;
+}
+
+/* Blockquotes take the Callout treatment: sage rule on the left edge only. */
+.dtj-prose blockquote{
+  background:var(--surface-callout);
+  border-left:var(--border-accent-width) solid var(--border-accent);
+  padding:14px 18px;
+  margin:1.6em 0 0;
+  font-size:.92rem;
+  max-width:var(--measure-lede);
+}
+.dtj-prose blockquote > *:first-child{margin-top:0}
+
+/* Blocks sit on --paper-dim inside a hairline, cap at 56ch, and scroll
+   horizontally rather than wrap. */
+.dtj-prose pre{
+  background:var(--code-bg);
+  border:1px solid var(--code-border);
+  border-radius:var(--radius);
+  padding:var(--code-pad);
+  font-family:var(--font-mono-meta);
+  font-size:var(--code-size);
+  line-height:var(--leading-code);
+  max-width:var(--measure-body);
+  overflow-x:auto;
+  margin:1.6em 0 0;
+}
+
+/* Entry screenshots. The system defines no imagery, so these follow its other
+   surfaces: hairline, 2px radius, no shadow, capped at the body measure, with a
+   mono caption rather than body italics. */
+.dtj-prose figure{margin:1.8em 0 0;max-width:var(--measure-body)}
+.dtj-prose figure img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--border-hairline);
+  border-radius:var(--radius);
+}
+.dtj-prose figcaption{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-meta);
+  color:var(--text-muted);
+  margin-top:8px;
+}
+
+.dtj-prose table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:var(--size-sm);
+  margin:1.6em 0 0;
+}
+.dtj-prose th,.dtj-prose td{
+  border-bottom:1px solid var(--border-hairline);
+  padding:8px 12px 8px 0;
+  text-align:left;
+}
+.dtj-prose th{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-micro);
+  letter-spacing:var(--tracking-tag);
+  text-transform:uppercase;
+  color:var(--text-muted);
+  font-weight:var(--weight-medium);
+}
+
+/* Below the rail breakpoint the wordmark and the links stop fitting on one
+   row; give the wordmark its own line rather than letting it wrap mid-name. */
+@media (max-width:720px){
+  .dtj-page > nav{flex-wrap:wrap;gap:12px}
+  .dtj-page > nav > div:first-child{flex:1 0 100%}
+}
+
+/* ---- theme toggle: a mono nav link, not a control ---- */
+
+.dtj-theme-toggle{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-micro);
+  letter-spacing:var(--tracking-tag);
+  text-transform:uppercase;
+  color:var(--text-muted);
+  background:none;
+  border:0;
+  border-bottom:1px solid transparent;
+  padding:0;
+  cursor:pointer;
+  line-height:inherit;
+}
+.dtj-theme-toggle:hover{color:var(--text-body);border-bottom-color:var(--text-body)}
+
+/* The toggle's label follows the attribute, not React state — correct in the
+   server-rendered HTML, so it never flashes the wrong word. */
+.dtj-when-dark{display:none}
+[data-theme="dark"] .dtj-when-light{display:none}
+[data-theme="dark"] .dtj-when-dark{display:inline}
