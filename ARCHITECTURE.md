@@ -36,7 +36,9 @@ build. `lib/posts.ts` is the only module that touches `content/`.
 ```
 app/
   layout.tsx              Root shell: fonts, theme script, nav, footer
-  page.tsx                Home — bio, selected work, GitHub projects, latest entries
+  page.tsx                Home — bio, AI stack, selected work, GitHub projects, latest entries
+  ai-stack/page.tsx       The newest AI stack snapshot
+  ai-stack/[month]/page.tsx  One month's snapshot
   journal/page.tsx        The full ledger
   journal/[slug]/page.tsx One entry
   topics/page.tsx         All topics with their entries
@@ -55,12 +57,15 @@ components/
   ThemeToggle.tsx         Light/dark, persisted
   EntryRow.tsx            A Post rendered as ds/JournalEntry
   PageHead.tsx            Kicker + h1 + lede
+  AiStackView.tsx         A stack snapshot with its month-over-month diff
 
 lib/
   posts.ts                Read, sort, render, and slug the entries
+  ai-stack.ts             Stack lookups, month labels, and the diff
   links.ts                Every outbound URL, in one place
 
 content/journal/*.md      The entries
+content/ai-stack.ts       The monthly stack snapshots
 public/images/blog/       Figures embedded in entries
 ```
 
@@ -168,6 +173,42 @@ Topics were **not** carried over as-is. The originals tagged nearly every post
 `AI + Cybersecurity`, which made a topic index useless. They were re-cut so the axes
 discriminate: `AI/ML`, `SECURITY`, `VULN MGMT`, `AUTOMATION`, `THREAT INTEL`, `DFIR`.
 
+### The AI stack snapshots
+
+`/ai-stack` publishes the hardware, software, services, agents, and models in use, and is
+republished monthly. `content/ai-stack.ts` holds one object per month:
+
+```ts
+type StackMonth = {
+  month: string;   // "2026-08" — also the URL segment
+  intro: string;   // that month's lede
+  categories: { heading: string; groups: { heading: string; items: StackItem[] }[] }[];
+};
+type StackItem = { name: string; href?: string; note?: string };
+```
+
+**Adding a month is appending one object.** Each snapshot is written as the stack *is*,
+never as a list of changes: `diffStack()` in `lib/ai-stack.ts` compares it against the
+previous month and marks each item `new` / `unchanged`, appending anything that
+disappeared as `removed` so a dropped tool stays visible rather than silently vanishing.
+Groups and categories dropped whole come back the same way. The identity key is
+`category/group/item`, lowercased — so renaming an item reads as one removal plus one
+addition, which is what actually happened.
+
+Hardware is modelled as one group per component (`GPU`, `CPU`, `RAM`) holding a single
+item. That needs no special case at render time and lands naturally in the 150px rail:
+group heading in the rail, items in the body — the same shape as the home page's
+repository rows.
+
+This is the one deliberate exception to "`lib/posts.ts` is the only module that touches
+`content/`". It is structured data rather than prose, so it is an *imported TypeScript
+module*, not a filesystem read: a mistyped key fails the build instead of rendering blank.
+Nothing about the static, no-client-fetching invariant changes.
+
+`/ai-stack` always serves the newest month; `/ai-stack/YYYY-MM` serves any month and is
+what gets linked and indexed. The newest month is reachable at both, so its `[month]` page
+declares `/ai-stack` as canonical.
+
 ### Figures
 
 The source entries write a screenshot as an image paragraph followed by an italic caption
@@ -180,6 +221,9 @@ paragraph. `figures()` in `lib/posts.ts` fuses that pair into a `<figure>` /
 explicit requirement and it overrides the design system, which defines Input, SearchInput,
 Textarea, and a newsletter block. `components/ds/forms/` was never copied down. The
 absence is verified against the built output, not just the source.
+
+This is why the AI stack's month switcher is a row of links rather than a `<select>`. It
+also gives every month a real URL, which a dropdown would not.
 
 **Theme toggle without React state.** The label is driven by CSS off the `data-theme`
 attribute:
@@ -233,6 +277,23 @@ grep -rniE "<form|<input|<textarea" app components
 ## Change log
 
 Newest first. One entry per feature.
+
+### 2026-08-14 — My current AI stack
+
+A monthly, diffable inventory of the AI hardware and software actually in use.
+
+- `content/ai-stack.ts` — the snapshots, typed. August 2026 seeded as the first one.
+- `lib/ai-stack.ts` — lookups, month labels built from a table rather than
+  `toLocaleDateString` so they cannot shift with the build machine's locale, and
+  `diffStack()`.
+- `components/AiStackView.tsx` — the page body, shared by both routes so they cannot
+  drift. Groups reuse the `.dtj-rail` pattern; diff markers are a new `.dtj-stack-mark`
+  in `site.css`, mono micro, sage for added and muted for dropped. No `Pill` — that is
+  ochre, and ochre is topic tags only.
+- `/ai-stack` (newest) and `/ai-stack/[month]` (statically generated per month), with the
+  newest month canonicalised to `/ai-stack`.
+- A new home page section directly above Selected work, and `AI STACK` in the nav. The
+  home page's arrow label reads the newest month from the data, so it cannot go stale.
 
 ### 2026-08-11 — Initial build
 

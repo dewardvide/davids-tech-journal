@@ -6,6 +6,7 @@ import { NavBar } from './ds/navigation/NavBar.jsx';
 
 const LINKS = [
   { label: 'Work', href: '/' },
+  { label: 'AI stack', href: '/ai-stack' },
   { label: 'Journal', href: '/journal' },
   { label: 'Topics', href: '/topics' },
   { label: 'About', href: '/about' },

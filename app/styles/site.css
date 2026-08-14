@@ -53,6 +53,18 @@ h1,h2,h3{line-height:var(--leading-tight)}
   display:inline-block;
 }
 
+/* AI stack diff markers. The system has no badge at this weight — Pill is
+   ochre, which is reserved for topic tags — so the marker is set as mono
+   micro meta and takes its colour inline: sage for added, muted for dropped. */
+.dtj-stack-mark{
+  font-family:var(--font-mono-meta);
+  font-size:var(--size-micro);
+  letter-spacing:var(--tracking-tag);
+  text-transform:uppercase;
+  margin-left:10px;
+  white-space:nowrap;
+}
+
 /* ---- long-form prose (markdown → HTML) ---- */
 
 .dtj-prose{

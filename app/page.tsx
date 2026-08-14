@@ -4,6 +4,7 @@ import { Pill } from '@/components/ds/core/Pill.jsx';
 import { EntryList } from '@/components/ds/journal/EntryList.jsx';
 import { EntryRow } from '@/components/EntryRow';
 import { getAllPosts } from '@/lib/posts';
+import { getLatestStack, monthLabel } from '@/lib/ai-stack';
 import { LINKS } from '@/lib/links';
 
 const PRODUCTS = [
@@ -38,6 +39,7 @@ const REPOS = [
 
 export default function HomePage() {
   const latest = getAllPosts().slice(0, 3);
+  const latestStack = getLatestStack();
 
   return (
     <>
@@ -49,6 +51,25 @@ export default function HomePage() {
           intersection of security, automation, and applied AI. Based in Wroc&#322;aw, Poland.
         </p>
       </header>
+
+      <section className="dtj-section">
+        <h2>My current AI stack</h2>
+        <p
+          style={{
+            color: 'var(--text-muted)',
+            fontSize: 'var(--size-sm)',
+            margin: '1.4em 0 0',
+            maxWidth: 'var(--measure-body)',
+          }}
+        >
+          The hardware I run locally, the inference and fine-tuning tools I actually use, and the
+          agents, services, and models I&rsquo;m watching. Republished every month, with what
+          changed since the last one.
+        </p>
+        <Link href="/ai-stack" className="dtj-arrow" style={{ marginTop: '1.4em' }}>
+          View the {monthLabel(latestStack.month)} stack &rarr;
+        </Link>
+      </section>
 
       <section className="dtj-section">
         <h2>Selected work</h2>
