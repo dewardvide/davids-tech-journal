@@ -24,6 +24,12 @@ const PRODUCTS = [
 
 const REPOS = [
   {
+    tag: 'LLM OPS',
+    title: 'vllm-ctl',
+    href: LINKS.vllmCtl,
+    body: 'A local control plane for vLLM: search and download models, check they fit in VRAM before you run them, launch servers with every engine option exposed, and watch GPU telemetry and GuideLLM benchmarks live.',
+  },
+  {
     tag: 'TERRAFORM',
     title: 'Simple Sentinel',
     href: LINKS.simpleSentinel,
