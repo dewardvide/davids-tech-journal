@@ -36,7 +36,7 @@ build. `lib/posts.ts` is the only module that touches `content/`.
 ```
 app/
   layout.tsx              Root shell: fonts, theme script, nav, footer
-  page.tsx                Home — bio, AI stack, selected work, GitHub projects, latest entries
+  page.tsx                Home — bio, AI stack, selected work, GitHub projects (REPOS in the file), latest entries
   ai-stack/page.tsx       The newest AI stack snapshot
   ai-stack/[month]/page.tsx  One month's snapshot
   journal/page.tsx        The full ledger
@@ -277,6 +277,21 @@ grep -rniE "<form|<input|<textarea" app components
 ## Change log
 
 Newest first. One entry per feature.
+
+### 2026-08-14 — vllm-ctl in selected projects
+
+`dewardvide/vllm-ctl` added to the home page's Selected GitHub projects, first in the
+list. It is the newest of the three and the only one on the local-inference side of the
+work the site now leads with.
+
+- `REPOS` in `app/page.tsx` — one appended object. The section already maps the array, so
+  there is no render change.
+- `lib/links.ts` — `vllmCtl`. The URL does not get inlined; that module stays the only
+  place an outbound URL is written.
+- Its tag reads `LLM OPS`, a domain label, where the other two rows carry stack labels
+  (`TERRAFORM`, `PYTHON`). Deliberate: the repo is TypeScript, and saying so would tell a
+  reader nothing about what it is. Ordering across the whole list is manual — literal
+  array order, no sort and no GitHub API call, which keeps the static invariant intact.
 
 ### 2026-08-14 — My current AI stack
 
