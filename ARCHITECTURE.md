@@ -43,7 +43,7 @@ app/
   journal/[slug]/page.tsx One entry
   topics/page.tsx         All topics with their entries
   topics/[topic]/page.tsx One topic
-  about/page.tsx          Prose only
+  about/page.tsx          Prose, plus the certifications list (CERTIFICATIONS in the file)
   not-found.tsx           404
   styles/
     styles.css            Entry point — @import list only
