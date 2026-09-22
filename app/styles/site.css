@@ -73,6 +73,14 @@ h1,h2,h3{line-height:var(--leading-tight)}
   max-width:var(--measure-body);
 }
 .dtj-prose > * + *{margin-top:1.1em}
+
+/* An entry's header sits on the rail grid, but the prose below it is generated
+   markup with no rail cell of its own — it would start at the page edge, a rail
+   and a gap to the left of the h1 it belongs to. Take the same offset directly,
+   and drop it at the width where responsive.css unstacks the rail. */
+.dtj-entry-body{margin-left:calc(var(--rail-width) + var(--gap-rail))}
+@media (max-width:720px){.dtj-entry-body{margin-left:0}}
+
 .dtj-prose h2{
   font-size:var(--size-h2);
   margin:1.8em 0 .3em;

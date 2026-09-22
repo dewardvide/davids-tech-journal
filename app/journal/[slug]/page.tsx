@@ -72,7 +72,7 @@ export default async function EntryPage({ params }: Params) {
       </header>
 
       {/* Body is markdown authored in content/journal, rendered at build time. */}
-      <div className="dtj-prose" style={{ marginTop: '2.4em' }} dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="dtj-prose dtj-entry-body" style={{ marginTop: '2.4em' }} dangerouslySetInnerHTML={{ __html: html }} />
 
       <footer className="dtj-section">
         <Link href="/journal" className="dtj-arrow">
