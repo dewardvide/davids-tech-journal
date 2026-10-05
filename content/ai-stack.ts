@@ -38,7 +38,7 @@ export type StackMonth = {
 
 export const STACKS: StackMonth[] = [
   {
-    month: '2026-08',
+    month: '2026-10',
     intro:
       'A comprehensive outline of the AI hardware and software I’m currently working with.',
     categories: [
@@ -80,6 +80,98 @@ export const STACKS: StackMonth[] = [
             items: [
               { name: 'Claude', note: 'Pro subscription' },
               { name: 'ChatGPT', note: 'Pro subscription' },
+              { name: 'OpenRouter' },
+            ],
+          },
+          {
+            heading: 'Agents',
+            items: [
+              { name: 'Claude Code' },
+              { name: 'OpenCode' },
+              { name: 'Demerzel', note: 'not public — my home-built personal agent' },
+            ],
+          },
+          {
+            heading: 'Models of interest',
+            items: [
+              {
+                name: 'ibm-granite/granite-4.1-8b',
+                href: 'https://huggingface.co/ibm-granite/granite-4.1-8b',
+              },
+              { name: 'Qwen/Qwen3.6-27B', href: 'https://huggingface.co/Qwen/Qwen3.6-27B' },
+              {
+                name: 'DeepSeek V4 Flash',
+                href: 'https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731',
+              },
+              {
+                name: 'GPT-6 Astra',
+                href: 'https://openai.com/index/gpt-6-astra/',
+              },
+              {
+                name: 'Jev',
+                href: 'https://typesafe.ai/blog/introducing-system-one-models-and-jev',
+              },
+              {
+                name: 'Claude Opus 5.5',
+                href: 'https://www.anthropic.com/claude-opus-5-5',
+              },
+              {
+                name: 'GLM-5.3',
+                href: 'https://z.ai/blog/glm-5.3',
+              },
+            ],
+          },
+          {
+            heading: 'SDKs, MCP and other',
+            items: [{ name: 'MCP UI', href: 'https://github.com/MCP-UI-Org/mcp-ui' }],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    month: '2026-08',
+    intro:
+      'A comprehensive outline of the AI hardware and software I’m currently working with.',
+    categories: [
+      {
+        heading: 'Hardware',
+        groups: [
+          { heading: 'GPU', items: [{ name: 'Nvidia RTX 3090' }] },
+          { heading: 'CPU', items: [{ name: 'Ryzen 5 5600' }] },
+          { heading: 'RAM', items: [{ name: '16GB DDR4' }] },
+        ],
+      },
+      {
+        heading: 'Software',
+        groups: [
+          {
+            heading: 'Inference',
+            items: [
+              { name: 'vLLM', href: 'https://vllm.ai' },
+              { name: 'llama.cpp', href: 'https://github.com/ggml-org/llama.cpp' },
+              { name: 'vllm-ctl', href: 'https://github.com/dewardvide/vllm-ctl' },
+            ],
+          },
+          {
+            heading: 'Fine tuning',
+            items: [
+              { name: 'llama.cpp', href: 'https://github.com/ggml-org/llama.cpp' },
+              { name: 'unsloth', href: 'https://unsloth.ai' },
+            ],
+          },
+          {
+            heading: 'Quantisation',
+            items: [
+              { name: 'llama.cpp', href: 'https://github.com/ggml-org/llama.cpp' },
+              { name: 'LLM Compressor', href: 'https://github.com/vllm-project/llm-compressor' },
+            ],
+          },
+          {
+            heading: 'AI services',
+            items: [
+              { name: 'Claude', note: 'Pro subscription' },
+              { name: 'ChatGPT', note: 'Plus subscription' },
               { name: 'OpenRouter' },
             ],
           },
