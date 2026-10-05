@@ -247,8 +247,8 @@ export default function AboutPage() {
         <Callout style={{ marginTop: '1.4em' }}>
           Building a security, applied-AI, or automation project where operational reality matters?
           I&rsquo;m open to conversations about engineering work, collaboration, technical research,
-          and knowledge sharing. Start with <a href={LINKS.linkedin}>LinkedIn</a>, review my{' '}
-          <a href={LINKS.github}>GitHub</a>, or watch <a href={LINKS.cleonsec}>CleonSec</a>.
+          and knowledge sharing. Start with <a href={LINKS.linkedin}>LinkedIn</a> or review my{' '}
+          <a href={LINKS.github}>GitHub</a>.
         </Callout>
       </section>
     </>
