@@ -53,23 +53,14 @@ function Mark({ status }: { status: DiffItem['status'] }) {
       </span>
     );
   }
-  if (status === 'removed') {
-    return (
-      <span className="dtj-stack-mark" style={{ color: 'var(--text-muted)' }}>
-        &minus; dropped
-      </span>
-    );
-  }
   return null;
 }
 
 function Item({ item, first }: { item: DiffItem; first: boolean }) {
-  const muted = item.status === 'removed';
-
   return (
     // The first item aligns with the rail head; the rest are spaced off it.
-    <li style={{ marginTop: first ? 0 : '.45em', color: muted ? 'var(--text-muted)' : undefined }}>
-      {item.href && !muted ? <a href={item.href}>{item.name}</a> : item.name}
+    <li style={{ marginTop: first ? 0 : '.45em' }}>
+      {item.href ? <a href={item.href}>{item.name}</a> : item.name}
       {item.note ? (
         <span style={{ color: 'var(--text-muted)', fontSize: 'var(--size-sm)' }}>
           {' '}

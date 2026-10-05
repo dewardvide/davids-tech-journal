@@ -47,7 +47,7 @@ export function monthShort(month: string): string {
 
 /* ---- the diff ---- */
 
-export type DiffStatus = 'new' | 'unchanged' | 'removed';
+export type DiffStatus = 'new' | 'unchanged';
 export type DiffItem = StackItem & { status: DiffStatus };
 export type DiffGroup = { heading: string; items: DiffItem[] };
 export type DiffCategory = { heading: string; groups: DiffGroup[] };
@@ -65,10 +65,8 @@ const key = (s: string) => s.trim().toLowerCase();
 type IndexedGroup = { heading: string; items: Map<string, StackItem> };
 type IndexedCategory = { heading: string; groups: Map<string, IndexedGroup> };
 
-/** Keyed on category/group/item, all lowercased, with the display headings
-    carried alongside so a group that disappears can still be labelled. A
-    renamed item reads as one removal plus one addition — which is what
-    actually happened. */
+/** Keyed on category/group/item, all lowercased. A renamed item reads as one
+    removal plus one addition — which is what actually happened. */
 function index(stack: StackMonth): Map<string, IndexedCategory> {
   const categories = new Map<string, IndexedCategory>();
   for (const category of stack.categories) {
@@ -84,11 +82,10 @@ function index(stack: StackMonth): Map<string, IndexedCategory> {
 }
 
 /**
- * Compare a snapshot against the one before it. Items are marked `new` or
- * `unchanged`; anything the previous month had and this one does not is
- * appended to its group as `removed`, so a dropped tool is still visible
- * rather than silently absent. Groups and categories that disappear entirely
- * come back the same way.
+ * Compare a snapshot against the one before it. Current items are marked `new`
+ * or `unchanged`. Removed items are counted for the change summary but are not
+ * rendered in the current snapshot; they remain available in the linked
+ * historical snapshot.
  *
  * With no previous snapshot nothing is marked and the counts are zero.
  */
@@ -124,9 +121,8 @@ export function diffStack(current: StackMonth, previous?: StackMonth): StackDiff
       });
 
       const present = new Set(group.items.map((i) => key(i.name)));
-      for (const [k, item] of beforeGroup?.items ?? []) {
+      for (const k of beforeGroup?.items.keys() ?? []) {
         if (present.has(k)) continue;
-        items.push({ ...item, status: 'removed' });
         removed += 1;
       }
 
@@ -136,7 +132,6 @@ export function diffStack(current: StackMonth, previous?: StackMonth): StackDiff
     });
 
     for (const dropped of beforeCategory?.groups.values() ?? []) {
-      groups.push(...droppedGroup(dropped));
       removed += dropped.items.size;
     }
 
@@ -144,27 +139,12 @@ export function diffStack(current: StackMonth, previous?: StackMonth): StackDiff
     return { heading: category.heading, groups };
   });
 
-  // Categories dropped whole.
+  // Categories dropped whole are counted but live only in the older snapshot.
   for (const beforeCategory of before.values()) {
-    const groups: DiffGroup[] = [];
     for (const dropped of beforeCategory.groups.values()) {
-      groups.push(...droppedGroup(dropped));
       removed += dropped.items.size;
     }
-    if (groups.length) categories.push({ heading: beforeCategory.heading, groups });
   }
 
   return { categories, added, removed, since: previous.month };
-}
-
-/** A group present last month and gone this one, rendered entirely as removals.
-    Returns nothing for an empty group so no bare heading is left behind. */
-function droppedGroup(group: IndexedGroup): DiffGroup[] {
-  if (!group.items.size) return [];
-  return [
-    {
-      heading: group.heading,
-      items: [...group.items.values()].map((item) => ({ ...item, status: 'removed' as const })),
-    },
-  ];
 }

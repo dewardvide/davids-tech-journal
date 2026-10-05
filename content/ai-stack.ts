@@ -95,15 +95,6 @@ export const STACKS: StackMonth[] = [
             heading: 'Models of interest',
             items: [
               {
-                name: 'ibm-granite/granite-4.1-8b',
-                href: 'https://huggingface.co/ibm-granite/granite-4.1-8b',
-              },
-              { name: 'Qwen/Qwen3.6-27B', href: 'https://huggingface.co/Qwen/Qwen3.6-27B' },
-              {
-                name: 'DeepSeek V4 Flash',
-                href: 'https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731',
-              },
-              {
                 name: 'GPT-6 Astra',
                 href: 'https://openai.com/index/gpt-6-astra/',
               },
