@@ -27,8 +27,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  // Swap for a custom domain once one is pointed at this project.
-  metadataBase: new URL('https://davids-tech-journal.vercel.app'),
+  metadataBase: new URL('https://www.davids-tech-journal.com'),
   title: {
     default: "David's Tech Journal",
     template: "%s — David's Tech Journal",
