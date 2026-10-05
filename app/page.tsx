@@ -30,7 +30,7 @@ const REPOS = [
     body: 'A local control plane for vLLM: search and download models, check they fit in VRAM before you run them, launch servers with every engine option exposed, and watch GPU telemetry and GuideLLM benchmarks live.',
   },
   {
-    tag: 'FORECASTING',
+    tag: 'AI/ML',
     title: 'TimesFM Studio',
     href: LINKS.timesfmStudio,
     body: 'A local web app for forecasting CSV time series with Google’s TimesFM-3 — data preparation, backtesting, accuracy metrics, uncertainty bands, and GPU, CPU, or Apple Silicon support.',
