@@ -79,7 +79,7 @@ export const STACKS: StackMonth[] = [
             heading: 'AI services',
             items: [
               { name: 'Claude', note: 'Pro subscription' },
-              { name: 'ChatGPT', note: 'Plus subscription' },
+              { name: 'ChatGPT', note: 'Pro subscription' },
               { name: 'OpenRouter' },
             ],
           },
