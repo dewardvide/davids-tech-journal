@@ -5,6 +5,7 @@ export const LINKS = {
   wrangler: 'https://wrangler-nodejs.vercel.app',
   cleonsec: 'https://www.youtube.com/@CleonSec',
   vllmCtl: 'https://github.com/dewardvide/vllm-ctl',
+  timesfmStudio: 'https://github.com/dewardvide/TimesFM-Studio',
   simpleSentinel: 'https://github.com/dewardvide/Simple_Sentinel',
   sentinelNotebook: 'https://github.com/dewardvide/My-First-Sentinel-Notebook',
 } as const;

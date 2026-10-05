@@ -15,7 +15,7 @@ const PRODUCTS = [
     body: 'AI-powered data analysis for CSV and Excel files — trend analysis, auto-generated visualizations, and privacy-first handling of whatever you drop in.',
   },
   {
-    meta: 'VIDEO',
+    meta: 'AUTOMATED YOUTUBE CHANEL',
     title: 'CleonSec',
     href: LINKS.cleonsec,
     body: 'Cybersecurity on YouTube: walkthroughs, research breakdowns, and tool demos.',
@@ -28,6 +28,12 @@ const REPOS = [
     title: 'vllm-ctl',
     href: LINKS.vllmCtl,
     body: 'A local control plane for vLLM: search and download models, check they fit in VRAM before you run them, launch servers with every engine option exposed, and watch GPU telemetry and GuideLLM benchmarks live.',
+  },
+  {
+    tag: 'FORECASTING',
+    title: 'TimesFM Studio',
+    href: LINKS.timesfmStudio,
+    body: 'A local web app for forecasting CSV time series with Google’s TimesFM-3 — data preparation, backtesting, accuracy metrics, uncertainty bands, and GPU, CPU, or Apple Silicon support.',
   },
   {
     tag: 'TERRAFORM',
