@@ -278,6 +278,22 @@ grep -rniE "<form|<input|<textarea" app components
 
 Newest first. One entry per feature.
 
+### 2026-10-05 — About page positioning refresh
+
+Reframed the About page as a concise professional profile that makes capabilities,
+evidence, and the next action easy to scan.
+
+- `app/about/page.tsx` — sharper positioning, a four-part capability overview, proof
+  through shipped tools and published work, an explicit working approach, and a stronger
+  collaboration call to action. Certifications remain as validation after demonstrated
+  work rather than carrying the page by themselves.
+- Page metadata now describes the security-engineering, automation, Microsoft Sentinel,
+  and applied-AI focus, including route-specific Open Graph fields.
+- `app/layout.tsx` — `metadataBase` now uses the attached custom domain so canonical
+  metadata and share URLs resolve to the public site.
+- No design-system files or tokens changed; the page composes the existing rail, meta,
+  callout, typography, spacing, and hairline patterns.
+
 ### 2026-08-14 — vllm-ctl in selected projects
 
 `dewardvide/vllm-ctl` added to the home page's Selected GitHub projects, first in the
@@ -333,6 +349,4 @@ Built the site from an empty directory and deployed it.
 
 Known loose ends:
 
-- `metadataBase` in `app/layout.tsx` points at the `.vercel.app` URL. Update it when a
-  custom domain is attached — it is the only place the domain is hard-coded.
 - `public/{file,globe,next,vercel,window}.svg` are unused `create-next-app` leftovers.

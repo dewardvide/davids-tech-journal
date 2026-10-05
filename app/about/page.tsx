@@ -1,8 +1,59 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Callout } from '@/components/ds/core/Callout.jsx';
 import { Meta } from '@/components/ds/core/Meta.jsx';
 import { PageHead } from '@/components/PageHead';
 import { LINKS } from '@/lib/links';
+
+const CAPABILITIES = [
+  {
+    label: 'Security engineering',
+    title: 'Detection, triage, and threat-informed decisions',
+    body: 'I develop and test detection logic, investigate how it behaves against real traffic, triage vulnerabilities, and turn threat intelligence into decisions analysts can act on.',
+  },
+  {
+    label: 'Applied AI',
+    title: 'AI systems evaluated against real security work',
+    body: 'I test models on representative datasets, measure precision and failure modes, and design AI-assisted workflows that improve analysis without hiding uncertainty from the operator.',
+  },
+  {
+    label: 'Automation',
+    title: 'Repeatable tooling and infrastructure',
+    body: 'I build with Python, TypeScript, Terraform, Azure, and Microsoft Sentinel — from analyst workflows and data tools to reproducible cloud deployments and local LLM infrastructure.',
+  },
+  {
+    label: 'Communication',
+    title: 'Technical work made useful to other people',
+    body: 'I turn experiments, implementation details, and lessons learned into clear research, notebooks, and video walkthroughs that practitioners can challenge and reuse.',
+  },
+];
+
+const PROOF = [
+  {
+    label: 'Product',
+    title: 'Wrangler',
+    href: LINKS.wrangler,
+    body: 'An AI-powered workspace for analysing CSV and Excel data, generating visualisations, and keeping uploaded data private.',
+  },
+  {
+    label: 'LLM operations',
+    title: 'vllm-ctl',
+    href: LINKS.vllmCtl,
+    body: 'A local control plane for vLLM with model discovery, VRAM fit checks, launch configuration, GPU telemetry, and live benchmarking.',
+  },
+  {
+    label: 'Cloud security',
+    title: 'Simple Sentinel',
+    href: LINKS.simpleSentinel,
+    body: 'A Terraform template for provisioning a complete Azure Sentinel SIEM workspace as repeatable infrastructure.',
+  },
+  {
+    label: 'Technical education',
+    title: 'CleonSec',
+    href: LINKS.cleonsec,
+    body: 'Cybersecurity walkthroughs, research breakdowns, and practical tool demonstrations on YouTube.',
+  },
+];
 
 /** Held certifications, newest first. Each is verifiable by its credential ID. */
 const CERTIFICATIONS = [
@@ -23,9 +74,17 @@ const CERTIFICATIONS = [
   { name: 'Junior Penetration Tester (eJPT)', credentialId: '92568821' },
 ];
 
+const description =
+  'Meet David Omurwa, a cybersecurity engineer building detection engineering, security automation, Microsoft Sentinel, and applied AI systems.';
+
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'David Omurwa — cybersecurity engineer, AI builder, and tool maker, based in Wrocław, Poland.',
+  title: 'About David Omurwa',
+  description,
+  openGraph: {
+    title: 'David Omurwa — cybersecurity engineer and applied AI builder',
+    description,
+    url: '/about',
+  },
 };
 
 export default function AboutPage() {
@@ -34,35 +93,144 @@ export default function AboutPage() {
       <PageHead
         kicker="About"
         title="David Omurwa"
-        lede="Cybersecurity engineer, AI builder, and tool maker working at the intersection of security, automation, and applied AI."
+        lede="Cybersecurity engineer building practical AI and automation for security teams — from detection engineering and vulnerability triage to local LLM infrastructure and repeatable cloud deployments."
       />
 
       <div className="dtj-prose" style={{ marginTop: '3.2em' }}>
         <p>
-          I&rsquo;m based in Wroc&#322;aw, Poland. My day-to-day sits between security operations and the
-          machinery around it — detection logic, vulnerability triage, threat intelligence, and the
-          automation that keeps any of it sustainable at volume.
+          I help turn noisy, manual security work into systems that are easier to trust, operate, and
+          scale. My work sits across security operations, detection logic, vulnerability analysis,
+          threat intelligence, and the engineering around them.
         </p>
         <p>
-          This journal is where that work gets written down. Most entries start as something I actually
-          had to do: a model I tested against a real dataset, a rule that looked clean until it met
-          production traffic, a workflow I built because the manual version had stopped scaling. I
-          publish the results including the parts that did not work, because those are usually the
-          useful parts.
+          I&rsquo;m based in Wroc&#322;aw, Poland. What connects my projects is a practical standard:
+          start with a real operational problem, test the solution against evidence, and keep the
+          human operator in control.
         </p>
-        <p>
-          Alongside the writing I build tools — <a href={LINKS.wrangler}>Wrangler</a> for data analysis,{' '}
-          <a href={LINKS.simpleSentinel}>Simple Sentinel</a> for standing up an Azure Sentinel stack — and
-          publish cybersecurity walkthroughs on <a href={LINKS.cleonsec}>CleonSec</a>.
+      </div>
+
+      <section className="dtj-section">
+        <h2>What I bring</h2>
+        <p
+          style={{
+            color: 'var(--text-muted)',
+            fontSize: 'var(--size-sm)',
+            margin: '1.4em 0 0',
+            maxWidth: 'var(--measure-body)',
+          }}
+        >
+          A security-first combination of operational depth, software delivery, and clear technical
+          communication.
         </p>
+        <div style={{ borderTop: '1px solid var(--border-hairline)', marginTop: '1.4em' }}>
+          {CAPABILITIES.map((capability) => (
+            <article
+              key={capability.label}
+              className="dtj-rail"
+              style={{ padding: '26px 0', borderBottom: '1px solid var(--border-hairline)' }}
+            >
+              <div className="dtj-rail-head" style={{ paddingTop: '4px' }}>
+                <Meta>{capability.label}</Meta>
+              </div>
+              <div>
+                <h3 style={{ margin: 0 }}>{capability.title}</h3>
+                <p
+                  style={{
+                    color: 'var(--text-muted)',
+                    fontSize: 'var(--size-sm)',
+                    margin: '.6em 0 0',
+                    maxWidth: 'var(--measure-body)',
+                  }}
+                >
+                  {capability.body}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <Callout style={{ marginTop: '1.8em' }}>
-          Nothing here is pitched as a complete solution. If you find something wrong, say so — the
-          fastest way to reach me is <a href={LINKS.linkedin}>LinkedIn</a>.
-        </Callout>
+      <section className="dtj-section">
+        <h2>Proof in the work</h2>
+        <p
+          style={{
+            color: 'var(--text-muted)',
+            fontSize: 'var(--size-sm)',
+            margin: '1.4em 0 0',
+            maxWidth: 'var(--measure-body)',
+          }}
+        >
+          I prefer working software, reproducible infrastructure, and published analysis over a list
+          of technologies without context.
+        </p>
+        <div style={{ borderTop: '1px solid var(--border-hairline)', marginTop: '1.4em' }}>
+          {PROOF.map((item) => (
+            <article
+              key={item.title}
+              className="dtj-rail"
+              style={{ padding: '26px 0', borderBottom: '1px solid var(--border-hairline)' }}
+            >
+              <div className="dtj-rail-head" style={{ paddingTop: '4px' }}>
+                <Meta>{item.label}</Meta>
+              </div>
+              <div>
+                <h3 style={{ margin: 0 }}>
+                  <a href={item.href} style={{ color: 'inherit', borderBottom: 'none' }}>
+                    {item.title}
+                  </a>
+                </h3>
+                <p
+                  style={{
+                    color: 'var(--text-muted)',
+                    fontSize: 'var(--size-sm)',
+                    margin: '.6em 0 0',
+                    maxWidth: 'var(--measure-body)',
+                  }}
+                >
+                  {item.body}
+                </p>
+                <a href={item.href} className="dtj-arrow" style={{ marginTop: '10px' }}>
+                  View the work &rarr;
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <Link href="/journal" className="dtj-arrow" style={{ marginTop: '1.4em' }}>
+          Read the research and field notes &rarr;
+        </Link>
+      </section>
 
+      <section className="dtj-section">
+        <h2>How I work</h2>
+        <div className="dtj-prose" style={{ marginTop: '1.4em' }}>
+          <p>
+            Most entries in this journal begin with something I actually had to do: evaluate a model
+            against a real dataset, understand why a clean rule failed in production traffic, or
+            automate a workflow whose manual version had stopped scaling.
+          </p>
+          <p>
+            I publish the method, the result, and the parts that did not work. That habit is central
+            to how I engineer: make assumptions visible, measure what matters, and leave behind
+            something another practitioner can inspect and improve.
+          </p>
+        </div>
+      </section>
+
+      <section className="dtj-section">
         <h2>Certifications</h2>
-        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+        <p
+          style={{
+            color: 'var(--text-muted)',
+            fontSize: 'var(--size-sm)',
+            margin: '1.4em 0 0',
+            maxWidth: 'var(--measure-body)',
+          }}
+        >
+          Formal validation across cloud and AI security, security operations, defensive practice,
+          and penetration testing.
+        </p>
+        <ul style={{ listStyle: 'none', paddingLeft: 0, marginTop: '1.4em' }}>
           {CERTIFICATIONS.map((cert) => (
             <li key={cert.credentialId} style={{ marginTop: '.9em' }}>
               {cert.name}
@@ -72,20 +240,17 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </section>
 
-        <h2>Elsewhere</h2>
-        <ul>
-          <li>
-            <a href={LINKS.github}>GitHub</a> — tools, templates, and the notebooks behind several entries
-          </li>
-          <li>
-            <a href={LINKS.linkedin}>LinkedIn</a> — where most conversations about these entries happen
-          </li>
-          <li>
-            <a href={LINKS.cleonsec}>CleonSec on YouTube</a> — walkthroughs, research breakdowns, tool demos
-          </li>
-        </ul>
-      </div>
+      <section className="dtj-section">
+        <h2>Let&rsquo;s connect</h2>
+        <Callout style={{ marginTop: '1.4em' }}>
+          Building a security, applied-AI, or automation project where operational reality matters?
+          I&rsquo;m open to conversations about engineering work, collaboration, technical research,
+          and knowledge sharing. Start with <a href={LINKS.linkedin}>LinkedIn</a>, review my{' '}
+          <a href={LINKS.github}>GitHub</a>, or watch <a href={LINKS.cleonsec}>CleonSec</a>.
+        </Callout>
+      </section>
     </>
   );
 }
