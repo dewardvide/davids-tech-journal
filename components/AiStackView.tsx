@@ -4,21 +4,10 @@ import {
   diffStack,
   getAllStacks,
   getPreviousStack,
-  monthLabel,
   monthShort,
   type DiffItem,
   type StackMonth,
 } from '@/lib/ai-stack';
-
-/** What changed since last month, as a sentence rather than a legend. */
-function changeLine(added: number, removed: number, since?: string): string {
-  if (!since) return 'First published snapshot';
-  if (!added && !removed) return `No changes since ${monthLabel(since)}`;
-  const parts: string[] = [];
-  if (added) parts.push(`${added} added`);
-  if (removed) parts.push(`${removed} dropped`);
-  return `${parts.join(' · ')} since ${monthLabel(since)}`;
-}
 
 /** The switcher is a row of links, not a select — this site has no forms. */
 function MonthNav({ month }: { month: string }) {
@@ -28,7 +17,13 @@ function MonthNav({ month }: { month: string }) {
   return (
     <nav
       className="dtj-kicker"
-      style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '1.6em' }}
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '18px',
+        marginTop: '1.6em',
+        fontSize: 'var(--size-sm)',
+      }}
     >
       {months.map((m) =>
         m === month ? (
@@ -73,16 +68,13 @@ function Item({ item, first }: { item: DiffItem; first: boolean }) {
 }
 
 export function AiStackView({ stack }: { stack: StackMonth }) {
-  const { categories, added, removed, since } = diffStack(stack, getPreviousStack(stack.month));
+  const { categories } = diffStack(stack, getPreviousStack(stack.month));
 
   return (
     <>
       <PageHead kicker="Updated monthly" title="My current AI stack" lede={stack.intro} />
 
       <MonthNav month={stack.month} />
-      <p className="dtj-kicker" style={{ marginTop: '.8em' }}>
-        {monthLabel(stack.month)} &middot; {changeLine(added, removed, since)}
-      </p>
 
       {categories.map((category) => (
         <section key={category.heading} className="dtj-section">
